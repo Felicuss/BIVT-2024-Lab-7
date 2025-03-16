@@ -239,8 +239,16 @@ namespace Lab_7
                     moods = new double[0];
                     return;
                 }
-                _moods = new double[moods.Length];
-                Array.Copy(moods, _moods, _moods.Length);
+                if (moods.Length > 7)
+                {
+                    _moods = new double[7];
+                    Array.Copy(moods, _moods, 7);
+                }
+                else
+                {
+                    _moods = new double[moods.Length];
+                    Array.Copy(moods, _moods, _moods.Length);
+                }
 
                 ModificateMood();
             }
@@ -261,7 +269,14 @@ namespace Lab_7
                         break;
                     }
                 }
-                for (int i = 0; i < marks.Length; i++) _participants[index].Evaluate(marks[i] * _moods[i]);
+                if (marks.Length < 7)
+                {
+                    for (int i = 0; i < marks.Length; i++) _participants[index].Evaluate(marks[i] * _moods[i]);
+                }
+                else
+                {
+                    for (int i = 0; i < 7; i++) _participants[index].Evaluate(marks[i] * _moods[i]);
+                }
             }
             public void Add(Participant p)
             {
