@@ -15,7 +15,7 @@ namespace Lab_7
             private Participant[] _participants;
 
             public string Name => _nameOfcompetition;
-            public int Standart => _nameOfstandard;
+            public int Standard => _nameOfstandard;
             public Participant[] Participants => _participants;
             public SkiJumping(string nameOfcompetition, int nameOfstandard)
             {
@@ -57,9 +57,9 @@ namespace Lab_7
 
             }
         }
-        public class JuniorSkyJumping : SkiJumping
+        public class JuniorSkiJumping : SkiJumping
         {
-            public JuniorSkyJumping() : base("100m", 100)
+            public JuniorSkiJumping() : base("100m", 100)
             {
 
             }

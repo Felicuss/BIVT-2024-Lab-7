@@ -233,8 +233,14 @@ namespace Lab_7
             public double[] Moods => _moods;
             public Skating(double[] moods)
             {
-                if (moods == null) return;
                 _participants = new Participant[0];
+                if (moods == null)
+                {
+                    moods = new double[0];
+                    return;
+                }
+                _moods = new double[moods.Length];
+                Array.Copy(moods, _moods, _moods.Length);
 
                 ModificateMood();
             }
@@ -242,16 +248,25 @@ namespace Lab_7
             protected abstract void ModificateMood();
             public void Evaluate(double[] marks)
             {
-                if (marks == null) return;
+                if (marks == null || _participants == null || _moods == null) return;
                 var sp = _participants.Select(p => p).Where(p => p.Marks != null && p.Marks.All(m => m == 0)).ToArray();
                 if (sp.Length == 0) return;
                 var first_person = sp[0];
-                for (int i = 0; i < marks.Length; i++) first_person.Evaluate(marks[i] * _moods[i]);
+                int index = 0;
+                for (int i = 0; i < _participants.Length; i++)
+                {
+                    if (_participants[i].Equals(first_person))
+                    {
+                        index = i;
+                        break;
+                    }
+                }
+                for (int i = 0; i < marks.Length; i++) _participants[index].Evaluate(marks[i] * _moods[i]);
             }
             public void Add(Participant p)
             {
-                if (_participants == null) return;
-                Array.Resize(ref _participants, _participants.Length);
+                if (_participants == null) _participants = new Participant[0];
+                Array.Resize(ref _participants, _participants.Length + 1);
                 _participants[_participants.Length - 1] = p;
             }
             public void Add(Participant[] ps)

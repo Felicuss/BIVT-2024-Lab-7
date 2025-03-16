@@ -104,12 +104,28 @@ namespace Lab_7
                 Sportsman.Sort(men);
                 Sportsman.Sort(women);
                 Sportsman[] result_array = new Sportsman[men.Length + women.Length];
+                bool flag = false;
+                if (men.Length != 0 && women.Length != 0) 
+                {
+                    flag = men[0].Time <= women[0].Time;
+                }
                 int i = 0, j = 0;
                 int k = 0;
-                while (i < men.Length && j < women.Length)
+                if (flag)
                 {
-                    result_array[k++] = men[i++];
-                    result_array[k++] = women[j++];
+                    while (i < men.Length && j < women.Length)
+                    {
+                        result_array[k++] = men[i++];
+                        result_array[k++] = women[j++];
+                    }
+                }
+                else
+                {
+                    while (i < men.Length && j < women.Length)
+                    {
+                        result_array[k++] = women[j++];
+                        result_array[k++] = men[i++];
+                    }
                 }
                 while (i < men.Length) result_array[k++] = men[i++];
                 while (j < women.Length) result_array[k++] = women[j++];

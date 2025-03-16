@@ -49,15 +49,15 @@ namespace Lab_7
                 int count = 0;
                 foreach (Response response in responses)
                 {
-                    if (questionNumber == 1 && response._animal != null)
+                    if (questionNumber == 1 && response._animal != null && response._animal == this._animal)
                     {
                         count++;
                     }
-                    if (questionNumber == 2 && response._characterTrait != null)
+                    if (questionNumber == 2 && response._characterTrait != null && response._characterTrait == this._characterTrait)
                     {
                         count++;
                     }
-                    if (questionNumber == 3 && response._concept != null)
+                    if (questionNumber == 3 && response._concept != null && response._concept == this._concept)
                     {
                         count++;
                     }
